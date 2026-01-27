@@ -1,25 +1,11 @@
-
-import React from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
-import Interests from './components/Interests';
-import Career from './components/Career';
-import Footer from './components/Footer';
-
-const App: React.FC = () => {
+function App() {
   return (
-    <div className="flex flex-col min-h-screen">
-      <Navbar />
-      <main className="flex-grow">
-        <Hero />
-        <About />
-        <Interests />
-        <Career />
-      </main>
-      <Footer />
+    <div style={{ padding: 40 }}>
+      <h1>React is working</h1>
+      <p>If you can see this, the issue is inside your components.</p>
     </div>
   );
-};
+}
 
 export default App;
+
