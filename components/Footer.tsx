@@ -11,6 +11,11 @@ const Footer: React.FC = () => {
       name: 'LinkedIn', 
       href: 'https://www.linkedin.com/in/owen-rumig-862701255/', 
       icon: 'fa-brands fa-linkedin-in' 
+    },
+    { 
+      name: 'Email', 
+      href: 'mailto:owendrumig@gmail.com', 
+      icon: 'fa-solid fa-envelope' 
     }
   ];
 
@@ -27,9 +32,9 @@ const Footer: React.FC = () => {
               <a 
                 key={social.name}
                 href={social.href} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full bg-sky-50 flex items-center justify-center text-slate-600 hover:bg-sky-600 hover:text-white transition-all duration-300"
+                target={social.href.startsWith('mailto:') ? undefined : "_blank"} 
+                rel={social.href.startsWith('mailto:') ? undefined : "noopener noreferrer"}
+                className="w-12 h-12 rounded-full bg-sky-50 flex items-center justify-center text-slate-600 hover:bg-sky-600 hover:text-white transition-all duration-300 shadow-sm hover:shadow-xl hover:scale-110 hover:-translate-y-1"
                 aria-label={social.name}
               >
                 <i className={`${social.icon} text-lg`}></i>

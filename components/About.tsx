@@ -1,17 +1,37 @@
-
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const About: React.FC = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section id="about" className="py-24 bg-white">
+    <section id="about" ref={sectionRef} className="py-24 bg-white scroll-mt-20">
       <div className="max-w-4xl mx-auto px-6">
         <div className="flex flex-col items-center text-center">
-          <span className="text-sky-600 font-bold uppercase tracking-widest text-sm mb-4">Who I Am</span>
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-8 tracking-tight">
+          <span className={`text-sky-600 font-bold uppercase tracking-widest text-sm mb-4 reveal ${isVisible ? 'active' : ''}`}>Who I Am</span>
+          <h2 className={`text-3xl md:text-4xl font-bold text-slate-900 mb-8 tracking-tight reveal ${isVisible ? 'active delay-100' : ''}`}>
             ABOUT ME
           </h2>
-          <div className="w-20 h-1 bg-sky-500 rounded-full mb-10" />
-          <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-light">
+          <div className={`w-20 h-1 bg-sky-500 rounded-full mb-10 reveal ${isVisible ? 'active delay-100' : ''}`} />
+          <p className={`text-lg md:text-xl text-slate-600 leading-relaxed font-light reveal ${isVisible ? 'active delay-200' : ''}`}>
             Hi, I’m Owen Rumig. I am currently a student at <span className="text-sky-700 font-medium">Carleton University</span> in the <span className="text-sky-700 font-medium">Sprott School of Business</span>. I have a strong interest in accounting and am exploring it as a future career path.
           </p>
           
@@ -31,7 +51,7 @@ const About: React.FC = () => {
               </div>
               <h3 className="text-xl font-bold text-slate-900 mb-3">Goal</h3>
               <p className="text-slate-600">
-                Building a professional foundation in the accounting sector through rigorous academic study and practical insights.
+                Working in a professional environment and make a meaningful contribution to my teams work.
               </p>
             </div>
           </div>
