@@ -1,11 +1,11 @@
 function App() {
   return (
-    <div style={{ padding: 40 }}>
-      <h1>React is working</h1>
-      <p>If you can see this, the issue is inside your components.</p>
+    <div className="min-h-screen bg-white flex items-center justify-center">
+      <h1 className="text-3xl font-bold text-slate-900">
+        Portfolio App Loaded ✅
+      </h1>
     </div>
   );
 }
 
 export default App;
-
