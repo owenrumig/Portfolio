@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import About from "./components/About";
 import Career from "./components/Career";
 import Interests from "./components/Interests";
@@ -14,7 +15,7 @@ export default function App() {
       <Interests />
       <Career />
       <Footer />
-      
+      <Analytics />
     </main>
   );
 }
