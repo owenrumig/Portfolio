@@ -1,9 +1,12 @@
 function App() {
   return (
-    <div className="min-h-screen bg-white">
-      <h1 className="text-3xl font-bold p-6">
-        Portfolio App Loaded ✅
-      </h1>
+    <div className="min-h-screen bg-white text-slate-900">
+      <section className="p-10">
+        <h2 className="text-2xl font-semibold">About Me</h2>
+        <p className="mt-4 max-w-xl">
+          This is my personal portfolio website.
+        </p>
+      </section>
     </div>
   );
 }
