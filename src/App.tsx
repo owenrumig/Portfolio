@@ -1,16 +1,13 @@
 import About from "./components/About";
 
-function App() {
+export default function App() {
   return (
-    <div className="min-h-screen bg-white text-slate-900">
-      <section className="p-10">
-        <h2 className="text-2xl font-semibold">About Me</h2>
-        <p className="mt-4 max-w-xl">
-          This is my personal portfolio website.
-        </p>
-      </section>
+    <div className="p-6">
+      <h1 className="text-2xl font-bold">
+        React is working
+      </h1>
+
+      <About />
     </div>
   );
 }
-
-export default App;
