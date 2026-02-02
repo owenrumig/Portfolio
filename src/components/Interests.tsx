@@ -82,16 +82,6 @@ const Interests: React.FC = () => {
             <p className="text-slate-600 leading-relaxed font-light flex-grow">
               When I have time I enjoy spending it playing video games and making videos. I have previously been a part of the eSports team at Carleton.
             </p>
-            <div className="mt-6">
-              <a 
-                href="https://linktr.ee/owenrumig" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-block px-6 py-2.5 bg-sky-600 text-white text-xs font-bold rounded-full hover:bg-sky-700 hover:shadow-lg hover:-translate-y-0.5 transition-all uppercase tracking-wider"
-              >
-                View Linktree
-              </a>
-            </div>
           </div>
         </div>
       </div>
