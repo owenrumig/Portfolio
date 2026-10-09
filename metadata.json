@@ -1,5 +1,6 @@
 {
-  "name": "Copy of Owen Rumig Personal Portfolio",
-  "description": "A modern, minimalist personal website for Owen Rumig, highlighting his background in business and accounting, career experience, and interests in trading cards.",
-  "requestFramePermissions": []
+  "name": "Owen Rumig",
+  "description": "Portfolio of Owen Rumig — Business student at Sprott School of Business, Carleton University, and trading card collector.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
