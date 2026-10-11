@@ -114,6 +114,7 @@ export const ORUMIG_DATA = {
   ebayUrl: "https://www.ebay.ca/usr/owru33",
   linkedInUrl: "https://www.linkedin.com/in/owen-rumig-862701255/",
   twitterUrl: "https://x.com/owenrumig",
+  fantasyHockeyUrl: "https://hockey-power-rankings.vercel.app/",
   email: "owendrumig@gmail.com",
   secondaryEmail: "owenrumig9@gmail.com"
 };

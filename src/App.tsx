@@ -62,13 +62,11 @@ export default function App() {
         <OrumigContact currentTheme={currentTheme} />
       </main>
 
-            {/* Footer */}
+      {/* Footer */}
       <OrumigFooter currentTheme={currentTheme} />
 
       {/* Vercel Web Analytics */}
       <Analytics />
-
-      {/* Quick Color Scheme Floating Switcher Widget */}
 
       {/* Quick Color Scheme Floating Switcher Widget */}
       <div className="fixed bottom-6 right-6 z-40">
