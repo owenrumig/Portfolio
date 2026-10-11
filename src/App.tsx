@@ -10,6 +10,7 @@ import { OrumigContact } from './components/OrumigContact';
 import { OrumigFooter } from './components/OrumigFooter';
 import { COLOR_THEMES, ColorTheme } from './theme/colorThemes';
 import { Check, Sparkles } from 'lucide-react';
+import { Analytics } from '@vercel/analytics/react';
 
 export default function App() {
   const [themeId, setThemeId] = useState<string>(() => {
@@ -61,8 +62,13 @@ export default function App() {
         <OrumigContact currentTheme={currentTheme} />
       </main>
 
-      {/* Footer */}
+            {/* Footer */}
       <OrumigFooter currentTheme={currentTheme} />
+
+      {/* Vercel Web Analytics */}
+      <Analytics />
+
+      {/* Quick Color Scheme Floating Switcher Widget */}
 
       {/* Quick Color Scheme Floating Switcher Widget */}
       <div className="fixed bottom-6 right-6 z-40">
