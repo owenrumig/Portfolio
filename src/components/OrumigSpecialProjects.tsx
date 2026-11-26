@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExternalLink, Trophy, ArrowUpRight, Medal, Globe, Lock } from 'lucide-react';
+import { ExternalLink, ArrowUpRight, ArrowLeft, Globe, Lock, Upload, Calendar, RefreshCw, Search, Layers } from 'lucide-react';
 import { ColorTheme } from '../theme/colorThemes';
 import { ORUMIG_DATA } from '../data/orumigData';
 
@@ -8,14 +8,14 @@ interface OrumigSpecialProjectsProps {
 }
 
 export const OrumigSpecialProjects: React.FC<OrumigSpecialProjectsProps> = ({ currentTheme }) => {
-  const appUrl = ORUMIG_DATA.fantasyHockeyUrl || 'https://hockey-power-rankings.vercel.app/';
+  const appUrl = ORUMIG_DATA.fantasyHockeyUrl || 'https://rosterpower.com/';
 
   const pillars = [
     {
       image: 'clock.png',
       alt: 'Multi-Season Baseline Clock',
       title: "Multi-Season Statistical Baseline",
-      desc: "Rather than judging a team solely on current-season point totals, the engine blends historical production (60% last season, 30% two seasons ago, 10% three seasons ago) to establish true player capabilities."
+      desc: "Rather than judging a team solely on current-season point totals, the engine blends current production (52.5%), a multi-season historical baseline (17.5%) and ESPN projections (30%) to establish true player capabilities."
     },
     {
       image: 'icecube.jpeg',
@@ -27,7 +27,7 @@ export const OrumigSpecialProjects: React.FC<OrumigSpecialProjectsProps> = ({ cu
       image: 'bars.png',
       alt: 'Roster Quality Bars',
       title: "True Roster Quality (Active + Bench)",
-      desc: "Evaluates comprehensive roster depth rather than small-sample head-to-head match outcomes, producing a predictive power ranking on an authentic 30–90 scale."
+      desc: "Evaluates full roster depth, bench included, rather than small-sample head-to-head outcomes. Rankings are ordered 100% by roster strength, with win-loss shown only for context."
     },
     {
       image: 'box.png',
@@ -37,16 +37,40 @@ export const OrumigSpecialProjects: React.FC<OrumigSpecialProjectsProps> = ({ cu
     }
   ];
 
-  // Authentic teams and data directly from The Big Man League on hockey-power-rankings.vercel.app
-  const liveTeams = [
-    { rank: 1, name: "Uncle H", owner: "Mike Nolan", powerScore: 87.03, record: "1-0-0", topStar: "Evan Bouchard", points: 33.95 },
-    { rank: 2, name: "Team Cheese Burger", owner: "Liam Aubertin", powerScore: 86.49, record: "1-0-0", topStar: "Sebastian Aho", points: 28.70 },
-    { rank: 3, name: "Dumbos squad", owner: "Owen Rumig", powerScore: 81.21, record: "1-0-0", topStar: "Jack Eichel", points: 30.80 },
-    { rank: 4, name: "Team The man", owner: "Marc Vall", powerScore: 79.51, record: "1-0-0", topStar: "Connor McDavid", points: 32.70 },
-    { rank: 5, name: "Tysi's team", owner: "Emma Tysick", powerScore: 77.65, record: "1-0-0", topStar: "Jesper Wallstedt", points: 30.20 },
-    { rank: 6, name: "better than marc 2", owner: "Abby Carter", powerScore: 76.38, record: "1-0-0", topStar: "Dylan Guenther", points: 24.45 },
-    { rank: 7, name: "Shoot top deck", owner: "Charlie Polite", powerScore: 75.00, record: "1-0-0", topStar: "Mark Stone", points: 26.65 },
-    { rank: 8, name: "Meni and Abi uwu", owner: "Alex Mellon, Abigail Matthews", powerScore: 45.00, record: "0-1-0", topStar: "Kirill Kaprizov", points: 27.80 },
+  const logoSrc = `${(import.meta as any).env?.BASE_URL ?? "/"}rosterpower-logo.webp`;
+  const leagueUrl = 'https://www.rosterpower.com/?sport=hockey&league=1737693371';
+  const condensedStyle = { fontFamily: '"Barlow Condensed", system-ui, sans-serif' };
+
+  // Snapshot of The Big Man league page on rosterpower.com (Nov 26, 2026)
+  const snapshotDate = 'Nov 26, 2026, 5:26 PM EST';
+
+  const podium = [
+    { rank: 1, label: 'League Leader', name: 'Meni and Abi uwu', record: '5-3', score: 90.0, move: '↑ +1' },
+    { rank: 2, label: '2nd Place Standing', name: 'Dumbos squad', record: '6-2', score: 78.56, move: '↑ +3' },
+    { rank: 3, label: '3rd Place Standing', name: 'Uncle H', record: '6-2', score: 78.23, move: '— —' },
+  ];
+
+  const podiumStyles: Record<number, { card: string; badge: string; label: string }> = {
+    1: { card: 'from-amber-950/40 to-[#0b1220] border-amber-500/50', badge: 'border-amber-500/60 bg-amber-950/60 text-amber-300', label: 'text-amber-300' },
+    2: { card: 'from-slate-800/40 to-[#0b1220] border-slate-500/50', badge: 'border-slate-500/60 bg-slate-800/70 text-slate-200', label: 'text-slate-200' },
+    3: { card: 'from-orange-950/40 to-[#0b1220] border-orange-700/50', badge: 'border-orange-700/60 bg-orange-950/60 text-orange-300', label: 'text-orange-400' },
+  };
+
+  const leaderboard = [
+    { name: 'Meni and Abi uwu', record: '5-3', score: 90.0 },
+    { name: 'Dumbos squad', record: '6-2', score: 78.56 },
+    { name: 'Uncle H', record: '6-2', score: 78.23 },
+    { name: 'Dusters', record: '3-5', score: 74.41 },
+    { name: "Tysi's team", record: '5-3', score: 72.97 },
+    { name: 'better than marc 3', record: '1-7', score: 69.99 },
+    { name: 'Team Cram', record: '4-4', score: 68.57 },
+    { name: 'Team The man', record: '6-2', score: 66.85 },
+    { name: 'Lafferty’s Bald Head', record: '5-3', score: 65.86 },
+    { name: 'Team Cheese Burger', record: '7-1', score: 64.75 },
+    { name: 'The Castros', record: '3-5', score: 56.33 },
+    { name: 'Shoot top deck', record: '2-6', score: 51.39 },
+    { name: 'mintens mittens', record: '1-7', score: 48.84 },
+    { name: 'better than marc 2', record: '2-6', score: 30.0 },
   ];
 
   return (
@@ -64,7 +88,7 @@ export const OrumigSpecialProjects: React.FC<OrumigSpecialProjectsProps> = ({ cu
           </h2>
           <div className={`w-20 h-1.5 ${currentTheme.primaryBg} rounded-full mb-6`} />
           <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-light">
-            Custom sports analytics platform and web application engineered to solve early-season variance in fantasy hockey leagues.
+            Custom sports analytics platform that ranks ESPN fantasy teams (NHL, NFL and NBA) purely on roster strength, separating real talent from schedule luck.
           </p>
         </div>
 
@@ -77,17 +101,17 @@ export const OrumigSpecialProjects: React.FC<OrumigSpecialProjectsProps> = ({ cu
             {/* Project Top Bar */}
             <div className="flex flex-wrap items-center justify-between gap-4 mb-8 pb-6 border-b border-slate-100">
               <div className="flex items-center gap-4">
-                <div
-                  className={`w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-700 p-2.5 flex items-center justify-center shrink-0 shadow-md text-white border border-cyan-400/40`}
-                >
-                  <Trophy className="w-8 h-8 text-white drop-shadow-sm" />
-                </div>
+                <img
+                  src={logoSrc}
+                  alt="RosterPower logo"
+                  className="w-14 h-14 rounded-2xl shrink-0 shadow-md border border-slate-200"
+                />
                 <div>
                   <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
-                    The Big Man — Fantasy Hockey Power Rankings
+                    RosterPower — Fantasy Power Rankings
                   </h3>
                   <p className="text-xs sm:text-sm text-slate-500 font-medium">
-                    Modern NHL-Inspired Fantasy Analytics & Predictive Roster Evaluation
+                    ESPN Fantasy Multi-Sport Power Rankings, Trade Analysis & Head-to-Head Comparisons
                   </p>
                 </div>
               </div>
@@ -158,8 +182,11 @@ export const OrumigSpecialProjects: React.FC<OrumigSpecialProjectsProps> = ({ cu
             </div>
           </div>
 
-          {/* Authentic Live Website Mockup (Styled Exactly like hockey-power-rankings.vercel.app) */}
-          <div className="rounded-3xl border border-slate-800 bg-[#070b14] shadow-2xl overflow-hidden text-slate-100">
+          {/* Live Website Preview (mirrors rosterpower.com/?sport=hockey&league=1737693371) */}
+          <div
+            className="rounded-3xl border border-slate-800 bg-[#070b14] shadow-2xl overflow-hidden text-slate-100"
+            style={{ fontFamily: '"Plus Jakarta Sans", system-ui, sans-serif' }}
+          >
             {/* Browser Top Window Bar */}
             <div className="px-4 sm:px-6 py-3.5 bg-[#0b1220] border-b border-slate-800 flex items-center justify-between gap-4 select-none">
               <div className="flex items-center gap-2">
@@ -167,15 +194,12 @@ export const OrumigSpecialProjects: React.FC<OrumigSpecialProjectsProps> = ({ cu
                 <span className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
                 <span className="w-3 h-3 rounded-full bg-[#27c93f]" />
               </div>
-
-              {/* URL Address Bar */}
               <div className="flex-1 max-w-md mx-auto hidden sm:flex items-center justify-center px-4 py-1.5 rounded-lg bg-[#060a12] border border-slate-800 text-xs font-mono text-slate-300 gap-2">
-                <Lock className="w-3 h-3 text-emerald-400" />
-                <span className="truncate">https://hockey-power-rankings.vercel.app</span>
+                <Lock className="w-3 h-3 text-emerald-400 shrink-0" />
+                <span className="truncate">rosterpower.com/?sport=hockey&amp;league=1737693371</span>
               </div>
-
               <a
-                href={appUrl}
+                href={leagueUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-xs font-bold text-cyan-400 hover:text-cyan-300 font-mono transition-colors"
@@ -185,186 +209,221 @@ export const OrumigSpecialProjects: React.FC<OrumigSpecialProjectsProps> = ({ cu
               </a>
             </div>
 
-            {/* In-App Navigation Bar (Directly from hockey-power-rankings.vercel.app) */}
-            <div className="px-6 py-4 border-b border-slate-800/80 bg-[#070b14]/90 flex flex-wrap items-center justify-between gap-4">
+            {/* Site Header */}
+            <div className="px-5 sm:px-7 py-3.5 border-b border-slate-800/80 bg-[#070b14] flex items-center justify-between gap-4">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-700 flex items-center justify-center border border-cyan-400/40 shadow-sm">
-                  <Trophy className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <div className="font-extrabold uppercase tracking-wider text-sm sm:text-base text-white">
-                    The Big Man — Power Rankings
-                  </div>
-                  <div className="text-[11px] text-cyan-400 font-mono">
-                    2026–27 Season · The Big Man League
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-3 text-xs">
-                <span className="px-2.5 py-1 rounded-md bg-cyan-950/80 text-cyan-300 border border-cyan-800/60 font-mono text-[11px]">
-                  Real Data Mode
+                <ArrowLeft className="w-4 h-4 text-cyan-400" />
+                <img src={logoSrc} alt="RosterPower logo" className="w-8 h-8 rounded-md" />
+                <span className="font-bold uppercase tracking-wide text-base sm:text-lg" style={condensedStyle}>
+                  <span className="text-white">Roster</span>
+                  <span className="text-cyan-400">Power</span>
                 </span>
-                <span className="text-slate-400 hidden sm:inline">14 Active Franchises</span>
               </div>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-cyan-800/70 bg-cyan-950/40 text-cyan-200 text-xs font-medium">
+                <Upload className="w-3.5 h-3.5" />
+                Data
+              </span>
             </div>
 
-            {/* In-App Podium: Top 3 Franchise Cards */}
-            <div className="p-6 border-b border-slate-800/80 bg-[#060a12]">
-              <div className="text-[11px] font-mono uppercase tracking-widest text-slate-400 mb-3 flex items-center gap-2">
-                <Medal className="w-3.5 h-3.5 text-amber-400" />
-                <span>Current League Podium</span>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {/* 1st Place - Gold */}
-                <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-b from-amber-950/30 to-[#070b14] border border-amber-500/40 relative overflow-hidden">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase bg-amber-400 text-slate-950">
-                      #1 Gold
-                    </span>
-                    <span className="font-mono text-xs text-amber-300">Record: 1-0-0</span>
+            {/* League Hero */}
+            <div className="relative px-5 sm:px-7 pt-8 pb-8 border-b border-slate-800/80 overflow-hidden bg-[radial-gradient(ellipse_at_top,_#14233a_0%,_#0a1120_50%,_#070b14_85%)]">
+              <div className="absolute inset-x-0 top-0 h-20 bg-[repeating-linear-gradient(90deg,transparent_0_46px,rgba(148,163,184,0.05)_46px_48px)] pointer-events-none" />
+              <div className="relative flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+                <div>
+                  <div className="flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-wider text-slate-400">
+                    <span className="px-2 py-0.5 rounded border border-cyan-700/70 bg-cyan-950/50 text-cyan-300 font-mono">Hockey (NHL)</span>
+                    <span>/</span>
+                    <span className="text-slate-300">14 Member Franchises</span>
+                    <span>/</span>
+                    <span>100% Roster Strength</span>
                   </div>
-                  <h5 className="text-lg font-bold text-white mb-0.5">Uncle H</h5>
-                  <p className="text-xs text-slate-400 mb-3">Mike Nolan</p>
-                  <div className="flex items-baseline justify-between pt-2 border-t border-amber-500/20">
-                    <span className="text-[11px] font-mono text-slate-400">Power Value</span>
-                    <span className="text-xl font-mono font-bold text-amber-400">87.03</span>
+                  <h4 className="mt-4 text-4xl sm:text-5xl font-bold uppercase leading-none text-white" style={condensedStyle}>
+                    The Big Man
+                  </h4>
+                  <div className="mt-1.5 text-lg sm:text-2xl font-bold uppercase text-cyan-300" style={condensedStyle}>
+                    Official Power Rankings Leaderboard
                   </div>
+                  <p className="mt-2 text-xs sm:text-sm text-slate-300">
+                    2026–27 Season · Full Roster Depth &amp; Weighted Points Analytics
+                  </p>
                 </div>
-
-                {/* 2nd Place - Silver */}
-                <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-b from-slate-800/40 to-[#070b14] border border-slate-400/40 relative overflow-hidden">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase bg-slate-300 text-slate-950">
-                      #2 Silver
+                <div className="w-full sm:w-72 shrink-0 p-4 rounded-xl border border-slate-700/70 bg-[#0b1220]/90">
+                  <div className="flex items-center justify-between text-xs text-slate-300">
+                    <span className="inline-flex items-center gap-1.5">
+                      <Calendar className="w-3.5 h-3.5 text-cyan-400" />
+                      Last Updated
                     </span>
-                    <span className="font-mono text-xs text-slate-300">Record: 1-0-0</span>
+                    <RefreshCw className="w-3.5 h-3.5 text-slate-400" />
                   </div>
-                  <h5 className="text-lg font-bold text-white mb-0.5">Team Cheese Burger</h5>
-                  <p className="text-xs text-slate-400 mb-3">Liam Aubertin</p>
-                  <div className="flex items-baseline justify-between pt-2 border-t border-slate-400/20">
-                    <span className="text-[11px] font-mono text-slate-400">Power Value</span>
-                    <span className="text-xl font-mono font-bold text-slate-200">86.49</span>
-                  </div>
-                </div>
-
-                {/* 3rd Place - Bronze */}
-                <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-b from-amber-950/20 to-[#070b14] border border-amber-600/30 relative overflow-hidden">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase bg-gradient-to-r from-amber-600 to-amber-500 text-white">
-                      #3 Bronze
-                    </span>
-                    <span className="font-mono text-xs text-amber-400/90">Record: 1-0-0</span>
-                  </div>
-                  <h5 className="text-lg font-bold text-white mb-0.5">Dumbos squad</h5>
-                  <p className="text-xs text-slate-400 mb-3">Owen Rumig</p>
-                  <div className="flex items-baseline justify-between pt-2 border-t border-amber-600/20">
-                    <span className="text-[11px] font-mono text-slate-400">Power Value</span>
-                    <span className="text-xl font-mono font-bold text-amber-300">81.21</span>
+                  <div className="mt-1.5 font-mono text-sm text-white">{snapshotDate}</div>
+                  <div className="mt-3 pt-3 border-t border-slate-800 flex items-center justify-between text-[11px]">
+                    <span className="text-slate-400">Roster Strength</span>
+                    <span className="font-mono text-cyan-400">14 Teams</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* In-App Leaderboard Table (Authentic styling from live site) */}
-            <div className="overflow-x-auto">
-              <table className="w-full text-left border-collapse text-xs">
-                <thead>
-                  <tr className="border-b border-slate-800 bg-[#070b14] text-slate-400 font-mono text-[11px] uppercase tracking-wider">
-                    <th className="py-3 px-5 text-center w-14">Rank</th>
-                    <th className="py-3 px-5">Franchise & Owner</th>
-                    <th className="py-3 px-4 text-center">Record</th>
-                    <th className="py-3 px-4 text-center">Power Value</th>
-                    <th className="py-3 px-5">Top Contributor (Most Actual Points)</th>
-                    <th className="py-3 px-5 text-right">League Status</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-800/60 font-sans">
-                  {liveTeams.map((team) => (
-                    <tr
-                      key={team.rank}
-                      className="hover:bg-slate-900/50 transition-colors"
-                    >
-                      {/* Rank */}
-                      <td className="py-3.5 px-5 text-center">
-                        <span
-                          className={`inline-flex items-center justify-center w-6 h-6 rounded-full font-mono text-xs font-bold ${
-                            team.rank === 1
-                              ? 'bg-amber-400 text-slate-950'
-                              : team.rank === 2
-                              ? 'bg-slate-300 text-slate-950'
-                              : team.rank === 3
-                              ? 'bg-amber-600 text-white'
-                              : 'bg-slate-800 text-slate-300'
-                          }`}
-                        >
+            {/* Top Three Powerhouses */}
+            <div className="px-5 sm:px-7 py-8 border-b border-slate-800/80 bg-[#081019]">
+              <div className="flex flex-wrap items-end justify-between gap-2 mb-5">
+                <div>
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-cyan-400">Championship Contenders</div>
+                  <div className="text-xl sm:text-2xl font-bold uppercase text-white" style={condensedStyle}>
+                    Top Three Powerhouses
+                  </div>
+                </div>
+                <span className="text-xs text-slate-400">
+                  Formula Aggregate · <span className="font-mono text-cyan-400">Top Tier</span>
+                </span>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:items-end">
+                {podium.map((team) => (
+                  <div
+                    key={team.rank}
+                    className={`p-5 rounded-2xl border bg-gradient-to-b ${podiumStyles[team.rank].card} ${
+                      team.rank === 1 ? 'md:order-2 md:pb-7' : team.rank === 2 ? 'md:order-1' : 'md:order-3'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2.5">
+                        <span className={`w-8 h-8 rounded-lg border flex items-center justify-center font-bold ${podiumStyles[team.rank].badge}`}>
                           {team.rank}
                         </span>
-                      </td>
-
-                      {/* Franchise */}
-                      <td className="py-3.5 px-5">
-                        <div className="font-bold text-white text-sm">
-                          {team.name}
-                        </div>
-                        <span className="text-[11px] text-slate-400">
-                          {team.owner}
+                        <span className={`text-[11px] font-bold uppercase tracking-wide ${podiumStyles[team.rank].label}`}>
+                          {team.label}
                         </span>
-                      </td>
-
-                      {/* Record */}
-                      <td className="py-3.5 px-4 text-center font-mono text-slate-300 font-medium">
-                        {team.record}
-                      </td>
-
-                      {/* Power Score */}
-                      <td className="py-3.5 px-4 text-center">
-                        <span className="font-mono text-sm font-bold text-cyan-400">
-                          {team.powerScore.toFixed(2)}
-                        </span>
-                      </td>
-
-                      {/* Top Contributor by Actual Points */}
-                      <td className="py-3.5 px-5 text-slate-300 text-xs font-mono">
-                        <span className="text-white font-medium">{team.topStar}</span>
-                        <span className="text-cyan-400 ml-1.5 text-[11px]">({team.points.toFixed(2)} pts)</span>
-                      </td>
-
-                      {/* Status */}
-                      <td className="py-3.5 px-5 text-right">
-                        <span className="text-[11px] font-mono text-slate-400">
-                          {team.rank <= 3 ? (
-                            <span className="text-amber-400 font-bold">Podium Contender</span>
-                          ) : team.rank <= 6 ? (
-                            <span className="text-emerald-400">Playoff Bound</span>
-                          ) : (
-                            <span className="text-slate-500">In the Hunt</span>
-                          )}
-                        </span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+                      </div>
+                      <span className="px-2 py-0.5 rounded-md border border-emerald-700/60 bg-emerald-950/50 text-emerald-300 text-[11px] font-mono">
+                        {team.move}
+                      </span>
+                    </div>
+                    <div className="mt-4 text-xl font-bold text-white">{team.name}</div>
+                    <span className="mt-2 inline-flex items-center gap-1.5 px-2 py-1 rounded-md border border-slate-700 bg-[#070b14] text-[10px] uppercase text-slate-400">
+                      Record <span className="font-mono text-cyan-300">{team.record}</span>
+                    </span>
+                    <div className="mt-5 pt-4 border-t border-slate-800 flex items-end justify-between gap-2">
+                      <div>
+                        <div className="text-[10px] uppercase tracking-wider text-slate-400">Team Value</div>
+                        <div className="font-mono text-3xl font-bold text-amber-100">{team.score.toFixed(2)}</div>
+                      </div>
+                      <span className="text-[9px] uppercase tracking-wider text-slate-500 text-right">Power Score (30–90)</span>
+                    </div>
+                    <div className="mt-3 pt-3 border-t border-slate-800 flex items-center justify-between text-xs text-cyan-400">
+                      <span>View Full Roster</span>
+                      <span>→</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            {/* In-App Live Formula & Footer Banner */}
-            <div className="p-5 border-t border-slate-800 bg-[#070b14] flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="text-xs text-slate-400 font-light text-center sm:text-left">
-                <span className="text-cyan-400 font-mono font-bold">The Big Man Analytics Engine:</span>{' '}
-                Formula: Power Score = 30 + 60 × (0.75 × Winning % + 0.25 × Normalized Player Strength) on a 30–90 scale.
+            {/* Power Rankings Leaderboard */}
+            <div className="px-5 sm:px-7 py-8 bg-[#070b14]">
+              <div className="flex flex-wrap items-center gap-2 text-[10px] font-bold uppercase tracking-wider">
+                <span className="text-cyan-400">Official League Table</span>
+                <span className="text-slate-600">/</span>
+                <span className="text-cyan-400">14 Teams Loaded</span>
+                <span className="text-slate-600">/</span>
+                <span className="text-slate-300">Roster Strength Basis</span>
+              </div>
+              <div className="mt-1 text-xl sm:text-2xl font-bold uppercase text-white" style={condensedStyle}>
+                Power Rankings Leaderboard
+              </div>
+              <div className="mt-4 flex flex-wrap items-center gap-3">
+                <div className="flex items-center gap-2 px-3 py-2 rounded-lg border border-slate-800 bg-[#0b1220] text-xs text-slate-500 w-full sm:w-60">
+                  <Search className="w-3.5 h-3.5" />
+                  Search team or record...
+                </div>
+                <div className="flex gap-1 p-1 rounded-lg border border-slate-800 bg-[#0b1220] text-xs">
+                  {['All 14', 'Top 3', 'Top 6', 'Bubble (7–11)'].map((tab, i) => (
+                    <span
+                      key={tab}
+                      className={`px-2.5 py-1 rounded-md ${i === 0 ? 'bg-cyan-950/70 border border-cyan-700/60 text-cyan-200' : 'text-slate-400'}`}
+                    >
+                      {tab}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div className="mt-4 px-4 py-3 rounded-xl border border-cyan-900/60 bg-cyan-950/20 text-xs text-slate-300 flex items-start gap-2.5">
+                <Layers className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+                <span>
+                  <span className="font-semibold text-cyan-300">100% Roster Strength:</span> Rankings are calculated purely from
+                  total roster talent, active starters, and depth. Win-loss records are shown for context only.
+                </span>
               </div>
 
-              <a
-                href={appUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-700 hover:from-cyan-500 hover:to-blue-600 text-white font-bold text-xs uppercase tracking-wider font-mono shadow-md transition-all flex items-center gap-2 shrink-0"
-              >
-                <span>Launch Live App</span>
-                <Globe className="w-3.5 h-3.5" />
-              </a>
+              <div className="mt-4 rounded-2xl border border-slate-800 overflow-hidden">
+                <table className="w-full text-left border-collapse text-xs">
+                  <thead>
+                    <tr className="border-b border-slate-800 bg-[#0b1220] text-slate-400 text-[10px] uppercase tracking-wider" style={condensedStyle}>
+                      <th className="py-3 px-4 w-16">Rank</th>
+                      <th className="py-3 px-4">Fantasy Franchise</th>
+                      <th className="py-3 px-4 text-right">Roster Strength</th>
+                      <th className="py-3 px-4 w-10" />
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-800/70">
+                    {leaderboard.map((team, idx) => {
+                      const rank = idx + 1;
+                      return (
+                        <tr
+                          key={team.name}
+                          className={`hover:bg-slate-900/50 transition-colors ${
+                            rank === 1
+                              ? 'shadow-[inset_3px_0_0_#fbbf24]'
+                              : rank === 2
+                              ? 'shadow-[inset_3px_0_0_#cbd5e1]'
+                              : rank === 3
+                              ? 'shadow-[inset_3px_0_0_#d97706]'
+                              : ''
+                          }`}
+                        >
+                          <td className="py-3 px-4">
+                            <span
+                              className={`inline-flex items-center justify-center w-7 h-7 rounded-lg border font-bold text-xs ${
+                                rank <= 3 ? podiumStyles[rank].badge : 'border-slate-700 bg-slate-900 text-slate-300'
+                              }`}
+                            >
+                              {rank}
+                            </span>
+                          </td>
+                          <td className="py-3 px-4">
+                            <div className="font-semibold text-white text-sm">{team.name}</div>
+                            <span className="text-[10px] uppercase text-slate-500">
+                              Rec <span className="font-mono text-cyan-300">{team.record}</span>
+                            </span>
+                          </td>
+                          <td className="py-3 px-4 text-right">
+                            <div className={`font-mono text-sm font-bold ${rank <= 3 ? 'text-amber-300' : 'text-cyan-300'}`}>
+                              {team.score.toFixed(2)}
+                            </div>
+                            <div className="text-[9px] uppercase tracking-wider text-slate-500">Roster Score</div>
+                          </td>
+                          <td className="py-3 px-4 text-slate-500">›</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="mt-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="text-[11px] text-slate-400 text-center sm:text-left">
+                  Showing 14 of 14 Franchises · Sorted by Highest Rank (1–14) ·{' '}
+                  <span className="font-mono text-cyan-400">Power Score = 30 + 60 × [Normalized Full-Roster Strength]</span>
+                </div>
+                <a
+                  href={leagueUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-xs uppercase tracking-wider shadow-md transition-all flex items-center gap-2 shrink-0"
+                >
+                  <span>View Live Rankings</span>
+                  <Globe className="w-3.5 h-3.5" />
+                </a>
+              </div>
             </div>
           </div>
         </div>

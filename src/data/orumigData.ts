@@ -16,12 +16,25 @@ export const ORUMIG_DATA = {
   careerBio: "From customer service to working on a golf course, each role has helped me develop stronger communication, teamwork, and attention to detail. I’m now building on these experiences through my studies in investments at Carleton University and working toward my future career.",
   careerJobs: [
     {
+      id: "lcbo",
+      company: "LCBO",
+      logo: `${(import.meta as any).env?.BASE_URL ?? "/"}lcbo-logo.webp`,
+      fallbackLogo: `${(import.meta as any).env?.BASE_URL ?? "/"}lcbo-logo.webp`,
+      role: "Customer Service Representative | Ottawa",
+      period: "2026 - Present",
+      description: "Provided customer service by assisting customers in finding beverages that suited their needs and offering personalized recommendations. Operated the cash register, processing transactions efficiently while maintaining a friendly and welcoming customer experience.",
+      skillsLearned: [
+        "Organization",
+        "Customer Service"
+      ]
+    },
+    {
       id: "stonebridge-golf-club",
       company: "Stonebridge Golf Club",
       logo: "https://raw.githubusercontent.com/owenrumig/my-website-assets/main/stonebridge.jpeg",
       fallbackLogo: "/src/assets/images/stonebridge.jpeg",
       role: "Grounds Crew | Ottawa",
-      period: "2026 - Present",
+      period: "2026",
       description: "Maintained golf course grounds to ensure a high-quality appearance and tournament-level playing conditions. Operated heavy machinery and completed landscaping work around flowerbeds, trees, and other areas of the course. Prepared and maintained bunkers by carefully raking and edging their perimeters.",
       skillsLearned: [
         "Time Management",
@@ -39,7 +52,7 @@ export const ORUMIG_DATA = {
       description: "Trained and onboarded new staff on workplace procedures and customer service standards. Maintained organized, accurately labelled, and appealing product displays. Provided friendly customer service by welcoming customers and assisting them in finding products.",
       skillsLearned: [
         "Communication",
-        "Customer Relations",
+        "Customer Service",
         "Organization",
         "Problem Solving"
       ]
@@ -47,15 +60,15 @@ export const ORUMIG_DATA = {
   ],
   careerRole: "Grounds Crew | Ottawa",
   careerCompany: "Stonebridge Golf Club",
-  careerPeriod: "2026 - Present",
+  careerPeriod: "2026",
   careerDetailed: "Maintaining premier course conditions and grounds presentation across the championship 18-hole golf course in Ottawa. Operating turf management equipment, preparing greens and fairways, and collaborating with the maintenance team.",
   careerBullets: [
     "Course conditioning and turf management operations",
     "Team collaboration and grounds maintenance excellence"
   ],
   competencies: [
+    "Customer Service",
     "Communication",
-    "Customer Relations",
     "Organization",
     "Problem Solving",
     "Time Management",
@@ -114,7 +127,7 @@ export const ORUMIG_DATA = {
   ebayUrl: "https://www.ebay.ca/usr/owru33",
   linkedInUrl: "https://www.linkedin.com/in/owen-rumig-862701255/",
   twitterUrl: "https://x.com/owenrumig",
-  fantasyHockeyUrl: "https://hockey-power-rankings.vercel.app/",
+  fantasyHockeyUrl: "https://rosterpower.com/",
   email: "owendrumig@gmail.com",
   secondaryEmail: "owenrumig9@gmail.com"
 };

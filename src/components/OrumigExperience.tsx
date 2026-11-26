@@ -37,8 +37,8 @@ export const OrumigExperience: React.FC<OrumigExperienceProps> = ({ currentTheme
             <div className={`h-full ${currentTheme.primaryBg} opacity-60 rounded-full`} />
           </div>
 
-          {/* 2-Column Horizontal Stages: Left (2026 - Present) -> Right (2023 - 2026) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 relative z-10">
+          {/* Horizontal Stages: most recent role on the left */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10 relative z-10">
             {descendingJobs.map((job, idx) => {
               const isCurrent = job.period.includes('Present');
 
@@ -98,12 +98,15 @@ export const OrumigExperience: React.FC<OrumigExperienceProps> = ({ currentTheme
                       </div>
 
                       {/* Job Description */}
-                      <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-light mt-4">
-                        {job.description}
-                      </p>
+                      {job.description && (
+                        <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-light mt-4">
+                          {job.description}
+                        </p>
+                      )}
                     </div>
 
                     {/* Skills Learned Bubbles */}
+                    {job.skillsLearned.length > 0 && (
                     <div className="pt-6 mt-6 border-t border-slate-100">
                       <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2.5">
                         Skills Learned
@@ -124,6 +127,7 @@ export const OrumigExperience: React.FC<OrumigExperienceProps> = ({ currentTheme
                         ))}
                       </div>
                     </div>
+                    )}
                   </div>
                 </div>
               );
